@@ -35,6 +35,7 @@ export async function upsertReminder(r: NewReminder) {
       )
       ON CONFLICT(event_id, place_id) DO UPDATE SET
         event_date   = excluded.event_date,
+        remind_date  = excluded.remind_date,
         note         = excluded.note,
         place_title  = excluded.place_title,
         event_title  = excluded.event_title,

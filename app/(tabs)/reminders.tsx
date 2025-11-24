@@ -202,21 +202,6 @@ export default function ReminderScreen() {
         contentStyle={{ paddingHorizontal: 1, paddingVertical: 0 }}
         scrollable={false}
       >
-        <Card style={{ margin: 12 }}>
-          <Card.Content>
-            <Text style={[styles.text, { color: theme.colors.onSurface }]}>
-              Schedule reminders for eco-tasks! Press the button below, and you'll be notified after 10 seconds.
-            </Text>
-          </Card.Content>
-          <Card.Actions>
-            <Button mode="contained" onPress={scheduleReminder}>
-              Schedule Test Reminder (10 sec)
-            </Button>
-          </Card.Actions>
-        </Card>
-
-        <Divider style={[styles.divider, { backgroundColor: theme.colors.outlineVariant }]} />
-
         {reminders.length === 0 ? (
           <View style={styles.emptyWrap}>
             <Text style={{ color: theme.colors.onSurfaceVariant, textAlign: 'center' }}>

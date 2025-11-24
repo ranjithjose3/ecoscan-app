@@ -26,8 +26,9 @@ export async function getDb(): Promise<SQLite.SQLiteDatabase> {
  * v2: addresses (+ indexes/triggers)
  * v3: events (+ indexes/triggers)
  * v4: reminders (+ indexes/triggers)
+ * v5: add remind_date to reminders
  */
-const DATABASE_VERSION = 4;
+const DATABASE_VERSION = 5;
 
 /**
  * Run database migrations and recommended PRAGMAs.
@@ -178,6 +179,17 @@ export async function migrate(): Promise<void> {
       `);
 
             v = 4;
+        }
+
+        /* ------------------------------ v4 -> v5 ------------------------------ */
+        if (v === 4) {
+            // Add remind_date column used by app logic (nullable, stored as TEXT YYYY-MM-DD)
+            await db.execAsync(`ALTER TABLE reminders ADD COLUMN remind_date TEXT;`);
+
+            // Optional: index for queries by place/remind_date (safe to create repeatedly)
+            await db.execAsync(`CREATE INDEX IF NOT EXISTS idx_reminders_place_reminddate ON reminders(place_id, remind_date);`);
+
+            v = 5;
         }
 
         await db.execAsync(`PRAGMA user_version = ${DATABASE_VERSION}`);

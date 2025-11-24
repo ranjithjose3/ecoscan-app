@@ -84,7 +84,9 @@ export default function RootLayout() {
 
   // Wait until fonts AND initialLocation are ready (undefined = not resolved yet)
   if (!loaded || showSplash || initialLocation === undefined) {
-    return <CustomSplash />;
+    //return <CustomSplash />;
+      return null;
+
   }
 
   return (
