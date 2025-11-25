@@ -9,7 +9,7 @@ export type EcoScanResult = {
   output_image: string;
 };
 
-const API_URL = "https://8eb2d33b61a5.ngrok-free.app/detect-image/";
+const API_URL = "http://98.94.88.203:8000/detect-image/";
 
 export const EcoScanService = {
   /**
